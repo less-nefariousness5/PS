@@ -21,22 +21,23 @@
 
 ---@class pvp_helper
 ---is_cc, cc_flag, remaining, is_immune, is_weak
----@field public is_crowd_controlled fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?, source_filter: number?): boolean, number, number, boolean, boolean
----@field public is_crowd_controlled_weak fun(self: pvp_helper, unit: game_object, min_remaining: number?, source_filter: number?): boolean, number, number
----@field public get_unit_dr fun(self: pvp_helper, unit: game_object, cc_flag: number, hit_time: number): number
----@field public get_cc_reduction_mult fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): number, number, number
----@field public get_cc_reduction_percentage fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): number, number, number
----@field public has_cc_reduction fun(self: pvp_helper, unit: game_object, threshold: number?, type_flags: number?, min_remaining: number?): boolean, number, number
----@field public is_cc_immune fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): boolean, number, number
----@field public is_slow fun(self: pvp_helper, unit: game_object, threshold: number?, min_remaining: number?, source_filter: number?): boolean, number, number
----@field public get_slow_percentage fun(self: pvp_helper, unit: game_object, min_remaining: number?, source_filter: number?): number, number
----@field public is_slow_immune fun(self: pvp_helper, unit: game_object, source_filter: number?, min_remaining: number?): boolean, number
+---@field public is_crowd_controlled fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining_ms: number?, source_filter: number?): boolean, number, number, boolean, boolean
+---@field public is_crowd_controlled_weak fun(self: pvp_helper, unit: game_object, min_remaining_ms: number?, source_filter: number?): boolean, number, number
+---@field public get_unit_dr fun(self: pvp_helper, unit: game_object, cc_flag: number, hit_time_sec: number): number
+---@field public get_cc_reduction_mult fun(self: pvp_helper, unit: game_object, type_flags?: integer, min_remaining_ms?: integer, ignore_dot?: boolean, dot_blacklist?: table<number>|nil, source_filter?: integer): number, integer, integer
+---@field public get_cc_reduction_percentage fun(self: pvp_helper, unit: game_object, type_flags?: integer, min_remaining_ms?: integer, ignore_dot?: boolean, dot_blacklist?: table<number>|nil, source_filter?: integer): number, integer, integer
+---@field public has_cc_reduction fun(self: pvp_helper, unit: game_object, threshold?: number, type_flags?: integer, min_remaining_ms?: integer, ignore_dot?: boolean, dot_blacklist?: table<number>|nil, source_filter?: integer): boolean, integer, integer
+---@field public is_cc_immune fun(self: pvp_helper, unit: game_object, type_flags?: integer, min_remaining_ms?: integer, ignore_dot?: boolean, dot_blacklist?: table<number>|nil, source_filter?: integer): boolean, integer, integer
+---@field public is_slow fun(self: pvp_helper, unit: game_object, threshold: number?, min_remaining_ms: number?, source_filter: number?): boolean, number, number
+---@field public get_slow_percentage fun(self: pvp_helper, unit: game_object, min_remaining_ms: number?, source_filter: number?): number, number
+---@field public is_slow_immune fun(self: pvp_helper, unit: game_object, source_filter: number?, min_remaining_ms: number?): boolean, number
 
 ---@class pvp_helper
----@field public get_damage_reduction_mult fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): number, number, number
----@field public get_damage_reduction_percentage fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): number, number, number
----@field public has_damage_reduction fun(self: pvp_helper, unit: game_object, threshold: number?, type_flags: number?, min_remaining: number?): boolean, number, number
----@field public is_damage_immune fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining: number?): boolean, number, number
+---@field public get_damage_reduction_mult fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining_ms: number?): number, number, number
+---@field public get_damage_reduction_percentage fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining_ms: number?): number, number, number
+---is_above_threshold, damage_type, remaining_ms | note: threshold is from 1-100
+---@field public has_damage_reduction fun(self: pvp_helper, unit: game_object, threshold: number?, type_flags: number?, min_remaining_ms: number?): boolean, number, number
+---@field public is_damage_immune fun(self: pvp_helper, unit: game_object, type_flags: number?, min_remaining_ms: number?): boolean, number, number
 
 ---@class pvp_helper
 ---@field public is_purgeable fun(self: pvp_helper, unit: game_object, min_remaining: number?): {is_purgeable: boolean, table: {buff_id: number, buff_name: string, priority: number, min_remaining: number}?, current_remaining_ms: number, expire_time: number}
@@ -66,10 +67,15 @@
 ---@field public KNOCKBACK number
 ---@field public SILENCE number
 ---@field public DISARM number
+---@field public MORTAL_COIL number
+---@field public HORROR number
+---@field public MIND_CONTROL number
+---@field public BLINDING_LIGHT number
+---@field public RANDOM_STUN number
+---@field public RANDOM_ROOT number
 ---@field public ANY number
 ---@field public ANY_BUT_ROOT number
 ---@field public combine fun(...: number): number
-
 ---@class damage_type_flags_table
 ---@field public PHYSICAL number
 ---@field public MAGICAL number

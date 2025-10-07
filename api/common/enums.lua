@@ -242,6 +242,23 @@
 ---@field public class_role table<string, table<number, number>>
 ---@field public get_group_role_backup fun(char_class_id: number, char_spec: number): number
 
+---@class creature_type
+---@field public BEAST number
+---@field public DRAGONKIN number
+---@field public DEMON number
+---@field public ELEMENTAL number
+---@field public GIANT number
+---@field public UNDEAD number
+---@field public HUMANOID number
+---@field public CRITTER number
+---@field public MECHANICAL number
+---@field public NOT_SPECIFIED number
+---@field public TOTEM number
+---@field public NON_COMBAT_PET number
+---@field public GAS_CLOUD number
+---@field public WILD_PET number
+---@field public ABERRATION number
+
 ---@class enums
 ---@field public class_id class_id
 ---@field public class_id_to_name class_id_to_name
@@ -261,3 +278,8 @@
 ---@field public window_enums window_enums
 ---@field public class_spec_id class_spec_id
 ---@field public class_spec_to_role class_spec_to_role
+---@field public creature_type creature_type
+
+
+---@class enums
+

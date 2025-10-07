@@ -9,7 +9,7 @@
 ---@field public launch_checkbox checkbox
 ---@field public force_render checkbox
 ---@field public are_buttons_empty fun(self: ui_buttons_info): boolean
----@field public push_button fun(self: ui_buttons_info, button_id: string, title: string, spell_ids: table<integer>, logic_function: function): nil
+---@field public push_button fun(self: ui_buttons_info, button_id: string, title: string, spell_ids: table<integer>, logic_function: function, index: integer | nil): nil
 ---@field public get_button_info fun(self: ui_buttons_info, button_id: string): table | nil
 ---@field public get_current_buttons_infos fun(self: ui_buttons_info): table
 ---@field public is_logic_attempting_only_once fun(self: ui_buttons_info): boolean

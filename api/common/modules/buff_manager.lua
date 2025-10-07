@@ -9,6 +9,7 @@
 ---@field public is_active boolean
 ---@field public remaining number
 ---@field public stacks number
+---@field public duration number
 
 ---@class buff_manager_cache_data
 ---@field public buff_id number
@@ -22,11 +23,11 @@
 
 ---@class buff_manager
 --- Gets the aura data for a unit, with caching.
----@field public get_aura_data fun(self: buff_manager, unit: game_object, enum_key: buff_db, custom_cache_duration_ms?: number): buff_manager_data
+---@field public get_aura_data fun(self: buff_manager, unit: game_object, enum_key: buff_db | table<number>, custom_cache_duration_ms?: number): buff_manager_data
 --- Gets the buff data for a unit, with caching.
----@field public get_buff_data fun(self: buff_manager, unit: game_object, enum_key: buff_db, custom_cache_duration_ms?: number): buff_manager_data
+---@field public get_buff_data fun(self: buff_manager, unit: game_object, enum_key: buff_db | table<number>, custom_cache_duration_ms?: number): buff_manager_data
 --- Gets the debuff data for a unit, with caching.
----@field public get_debuff_data fun(self: buff_manager, unit: game_object, enum_key: buff_db, custom_cache_duration_ms?: number): buff_manager_data
+---@field public get_debuff_data fun(self: buff_manager, unit: game_object, enum_key: buff_db | table<number>, custom_cache_duration_ms?: number): buff_manager_data
 --- Gets the buff cache for a unit.
 ---@field public get_buff_cache fun(self: buff_manager, unit: game_object, custom_cache_duration_ms?: number): buff_manager_cache_data[]
 --- Gets the debuff cache for a unit.

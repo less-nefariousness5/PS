@@ -14,7 +14,7 @@
 ---@field public render fun(self:checkbox, label:string, tooltip:string|nil):nil
 ---@field public get_widget_bounds fun(self:checkbox):table -- Returns a table with 2 elements, min and max. get_widget_bounds().min is the left border of the widget, and .max is the right border.
 ---@field public set fun(self:checkbox, val:boolean):nil
----@field public get fun(self:checkbox):boolean
+---@field public get_default fun(self:checkbox):boolean
 
 ---@class key_checkbox
 ---@field public get_main_checkbox_state fun(self:key_checkbox):boolean
@@ -103,8 +103,9 @@
 ---@field public get_type fun(self:color_picker)
 ---@field public get_widget_bounds fun(self:color_picker):table -- Returns a table with 2 elements, min and max. get_widget_bounds().min is the left border of the widget, and .max is the right border.
 ---@field public render fun(self:color_picker, label:string, tooltip:string|nil):nil
----@field public set fun(self:color_picker, val:integer):nil
+---@field public set fun(self:color_picker, val:color):nil
 ---@field public get fun(self:color_picker):color
+---@field public get_default fun(self:color_picker):color
 
 ---@class header
 ---@field public get_type fun(self:header)

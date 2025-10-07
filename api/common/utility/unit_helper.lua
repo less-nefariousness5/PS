@@ -60,7 +60,7 @@
 ---@field public is_damage_dealer fun(self: unit_helper, unit: game_object): boolean
 
 ---@class unit_helper
---- Get the power percentage of the unit.  
+--- Get the power percentage of the unit. Returns in decimal from 0.0 to 1.0
 --- https://wowpedia.fandom.com/wiki/Enum.PowerType
 ---@field public get_resource_percentage fun(self: unit_helper, unit: game_object, power_type: number): number
 

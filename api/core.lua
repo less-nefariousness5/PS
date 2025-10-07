@@ -60,8 +60,8 @@ function core.get_ping()
     return 0
 end
 
---- Get the current time in milliseconds since the injection time.
----@return number The current time in milliseconds.
+--- Get the current time in seconds since the injection time.
+---@return number The current time in seconds.
 function core.time()
     return 0
 end
@@ -197,6 +197,12 @@ function core.create_data_file(filename)
     return nil
 end
 
+---@return nil
+---@param text string
+function core.create_data_folder(text)
+    return nil
+end
+
 --- Writes data to a file.
 ---@return nil
 ---@param filename string The name of the data file to write to.
@@ -224,7 +230,7 @@ function core.is_main_menu_open()
 end
 
 ---@return string
----Returns "Retail", "Classic", "Classic Era"
+---Returns "Retail", "Classic", "Classic Era", "Classic Pandaria"
 function core.get_game_version()
     return ""
 end
@@ -297,6 +303,18 @@ end
 --- Returns vec2 x / y in 3dworld format, just missing z height
 function core.game_ui.get_world_pos_from_map_pos(map_id, map_pos)
     return {}
+end
+
+--- @return number
+--- Timer in MS Since the battlefield started
+function core.game_ui.get_battlefield_run_time()
+    return 0
+end
+
+--- @return number|nil
+--- NIL NONE | 0 Horde | 1 Ally | 2 Tie
+function core.game_ui.get_battlefield_winner()
+    return nil
 end
 
 ---@class input
@@ -649,6 +667,47 @@ function core.input.join_battlefield(battlefield_id, role_flags)
     return nil
 end
 
+---@return nil
+function core.input.leave_party()
+    return nil
+end
+
+---@return nil
+function core.input.leave_battlefield()
+    return nil
+end
+
+---@return nil
+---@param dungeon_id number
+---@param category_id number
+function core.input.select_dungeon(category_id, dungeon_id)
+    return nil
+end
+
+---@return nil
+---@param role_flags number
+---@param category_id number
+function core.input.join_dungeon(category_id, role_flags)
+    return nil
+end
+
+---@return nil
+function core.input.has_dungeon_proposal()
+    return nil
+end
+
+---@return nil
+---@param is_accept boolean
+function core.input.accept_dungeon_proposal(is_accept)
+    return nil
+end
+
+---@return nil
+---@param index integer
+function core.input.clear_dungeon_selections(index)
+    return nil
+end
+
 ---@class object_manager
 core.object_manager = {}
 
@@ -659,7 +718,7 @@ function core.object_manager.get_local_player()
 end
 
 --- Retrieves all game objects.
----@return game_object[]
+---@return table<game_object>
 function core.object_manager.get_all_objects()
     return {}
 end
@@ -672,13 +731,13 @@ function core.object_manager.get_arena_target(index)
 end
 
 --- Retrieves all visible game objects.
----@return game_object[]
+---@return table<game_object>
 function core.object_manager.get_visible_objects()
     return {}
 end
 
 --- Retrieves a list of game objects with all the arena frames.
----@return game_object
+---@return table<game_object>
 function core.object_manager.get_arena_frames()
     return {}
 end
@@ -931,6 +990,65 @@ end
 ---@param spell_id integer
 function core.spell_book.get_base_spell_id(spell_id)
     return 0
+end
+
+---@class totem_info
+---@field public have_totem boolean         -- Whether the totem exists
+---@field public totem_name string          -- Name of the totem
+---@field public start_time number          -- Start time of the totem
+---@field public duration number            -- Duration of the totem
+
+---@return totem_info
+---@param index integer
+---Returns a table with totem info for the given index (1–4).  
+---Index corresponds to the totem slot (e.g., Fire, Earth, Water, Air).
+function core.spell_book.get_totem_info(index)
+    return {}
+end
+
+---@return boolean
+---@param item_id integer
+function core.spell_book.is_item_usable(item_id)
+    return false
+end
+
+---@return integer
+---@param index integer
+--- 1 Blood | 2 Unholy | 3 Frost | 4 Death
+function core.spell_book.get_rune_type(index)
+    return 0
+end
+
+---@return boolean
+---@param index integer
+function core.spell_book.is_rune_slot_active(index)
+    return false
+end
+
+--- Retrieves the base (out-of-combat) power regeneration rate of the local player.
+--- This represents the passive regeneration rate when not casting or using abilities.
+---@return number The base power regeneration per second.
+function core.spell_book.get_base_power_regen()
+    return 0
+end
+
+--- Retrieves the power regeneration rate of the local player while casting.
+--- This may differ from the base regen due to talents, buffs, or class mechanics.
+---@return number The casting power regeneration per second.
+function core.spell_book.get_casting_power_regen()
+    return 0
+end
+
+--- Checks whether a spell is in range from a specified caster to a target.
+--- If `caster` is not provided, it defaults to the local player.
+--- If `target` is not provided, it defaults to the current target of the local player.
+--- This function internally evaluates the spell’s range data and both game object positions.
+---@param spell_id integer The ID of the spell to check.
+---@param target? game_object (optional) The target game object to check range against. Defaults to current target if omitted.
+---@param caster? game_object (optional) The caster game object. Defaults to the local player if omitted.
+---@return boolean Returns true if the target is within range for the specified spell, otherwise false.
+function core.spell_book.is_spell_in_range(spell_id, target, caster)
+    return false
 end
 
 ---@class graphics
@@ -1338,9 +1456,9 @@ function core.menu.button(id)
 end
 
 --- Creates a new color picker.
+---@return color_picker
 ---@param default_color color The default color value.
 ---@param id string The unique identifier for the color picker.
----@return color_picker
 function core.menu.colorpicker(default_color, id)
     return {} -- Empty return statement to implicitly return nil
 end
@@ -1353,7 +1471,9 @@ end
 
 --- Creates a new text input
 ---@return text_input
-function core.menu.text_input(id)
+---@param save_input boolean?
+---@param id string The unique identifier for the color picker.
+function core.menu.text_input(id, save_input)
     return {} -- Empty return statement to implicitly return nil
 end
 

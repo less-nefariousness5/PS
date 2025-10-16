@@ -39,3 +39,16 @@
 -- sq:queue_spell_target_fast(67890, some_target, 1, "Spell on target fast", false) -- Queue a spell for fast cooldown
 -- sq:queue_spell_position(67890, some_position, 1, "Spell on position", true) -- Queue a spell for a position
 -- sq:queue_spell_position_fast(67890, some_position, 1, "Spell on position fast", false) -- Queue a spell for a position with fast cooldown
+
+---@class spell_queue
+---Returns a shallow snapshot of the **normal** queue for debugging/telemetry.
+---@field public get_queue_snapshot fun(self: spell_queue): { [number]: { spell_id: number, spell_type: integer, target: game_object|nil, position: vec3|nil, priority: number, timestamp: number, skips_global: boolean, is_item_exception: boolean, allow_movement: boolean } }
+---Removes all entries from the **normal** queue that match `spell_id`. If `target` is provided, only entries for that exact target are removed. Returns the number removed.
+---@field public purge_by_spell fun(self: spell_queue, spell_id: number, target?: game_object): integer
+
+-- local sq = require("common/modules/spell_queue")
+-- local snap = sq:get_queue_snapshot()
+-- core.log(("queued entries: %d"):format(#snap))
+
+-- local removed = sq:purge_by_spell(348, someTarget) -- only normal queue
+-- core.log_warning(("purged %d immolate entries for target"):format(removed))

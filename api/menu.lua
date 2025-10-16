@@ -133,7 +133,7 @@
 ---@field public get_text_centered_x_pos fun(self:window, text:string):number
 ---@field public set_current_context_dynamic_drawing_offset fun(self:window, offset:vec2):nil
 ---@field public get_current_context_dynamic_drawing_offset fun(self:window):vec2
----@field public add_artificial_item_bounds fun(self:window, bounds_start:vec2, bounds_end:vec2):nil
+---@field public add_artificial_item_bounds fun(self:window, bounds_start:vec2, bounds_end:vec2, id:string):nil
 
 ---@class window
 ---@field public is_being_shown fun(self:window):boolean
@@ -142,6 +142,8 @@
 ---@field public is_mouse_button_pressed fun(self:window, button:integer):boolean
 ---@field public is_mouse_button_clicked fun(self:window, button:integer):boolean
 ---@field public is_rect_clicked fun(self:window, rect_min:vec2, rect_max:vec2):boolean
+---@field public push_item fun(self:window, label:string):nil
+---@field public pop_item fun(self:window):nil
 ---@field public is_window_clicked fun(self:window):boolean
 ---@field public is_window_hovered fun(self:window):boolean
 ---@field public is_window_double_clicked fun(self:window):boolean
@@ -159,9 +161,9 @@
 --note: you can also pass special rect rounding flags after the thickness parameter (up to 4 flags, integers). Check enums to see what these flags mean.
 ---@field public render_rect fun(self:window, pos_min_offset:vec2, pos_max_offset:vec2, col:color, rounding:number, thickness:number):nil
 --note: you can also pass special rect rounding flags after the thickness parameter (up to 4 flags, integers). Check enums to see what these flags mean.
----@field public render_rect_filled fun(self:window, pos_min_offset:vec2, pos_max_offset:vec2, col:color, rounding:number):nil
+---@field public render_rect_filled fun(self:window, pos_min_offset:vec2, pos_max_offset:vec2, col:color, rounding:number, flags:table|nil):nil
 --note: you can also pass special rect rounding flags after the thickness parameter (up to 4 flags, integers). Check enums to see what these flags mean.
----@field public render_rect_filled_multicolor fun(self:window, pos_min_offset:vec2, pos_max_offset:vec2, col_upr_left:color, col_upr_right:color, col_bot_right:color, col_bot_left:color, rounding:number):nil
+---@field public render_rect_filled_multicolor fun(self:window, pos_min_offset:vec2, pos_max_offset:vec2, col_upr_left:color, col_upr_right:color, col_bot_right:color, col_bot_left:color, rounding:number, flags:table|nil):nil
 ---@field public render_circle fun(self:window, center:vec2, radius:number, color:color, thickness:number):nil
 ---@field public render_circle_filled fun(self:window, center:vec2, radius:number, color:color):nil
 ---@field public render_bezier_quadratic fun(self:window, p1:vec2, p2:vec2, p3:vec2, color:color, thickness:number, num_segments:integer):nil

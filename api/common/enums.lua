@@ -185,7 +185,7 @@
 ---@class window_enums
 ---@field public window_behaviour_flags table<string, number>
 ---@field public font_id table<string, number>
----@field public rect_borders_rounding_flags table<string, number>
+---@field public rect_borders_rounding_flags table<integer>
 ---@field public window_resizing_flags table<string, number>
 ---@field public window_cross_visuals table<string, number>
 

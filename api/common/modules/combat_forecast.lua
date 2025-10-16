@@ -5,7 +5,7 @@
 -- x: -> IntelliSense
 -- Warning: Access with ":", not "."
 
----@class forecast_lenghts
+---@class forecast_lengths
 ---@field public DISABLED number
 ---@field public VERY_SHORT number
 ---@field public SHORT number
@@ -14,7 +14,7 @@
 
 ---@class combat_forecast
 --- Enum for forecast modes.
----@field public enum forecast_lenghts
+---@field public enum forecast_lengths
 --- Gets the forecast data.
 ---@field public get_forecast fun(self: nil): any
 --- Gets the forecast data for a single unit.

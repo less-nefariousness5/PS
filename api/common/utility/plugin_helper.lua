@@ -31,11 +31,11 @@
 ---@field public get_latency fun(self: plugin_helper): number
 
 ---@class plugin_helper
---- Retrieves the current combat lenght in core time.
+--- Retrieves the current combat length in core time.
 ---@field public get_current_combat_length_seconds fun(self: plugin_helper): number
 
 ---@class plugin_helper
---- Retrieves the current combat lenght in game time.
+--- Retrieves the current combat length in game time.
 ---@field public get_current_combat_length_miliseconds fun(self: plugin_helper): number
 
 ---@class plugin_helper

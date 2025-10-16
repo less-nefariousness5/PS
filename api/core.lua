@@ -127,6 +127,11 @@ function core.get_difficulty_name()
     return ""
 end
 
+---@return string
+function core.get_instance_type()
+    return ""
+end
+
 --- Get the name of the current localplayer map.
 ---@return string The name of the current localplayer map.
 function core.get_map_name()
@@ -1039,6 +1044,19 @@ function core.spell_book.get_casting_power_regen()
     return 0
 end
 
+---@class rune_info
+---@field public start number     -- cooldown start time (seconds)
+---@field public duration number  -- cooldown duration (seconds)
+---@field public ready boolean    -- true if the rune is ready now
+
+--- Retrieves cooldown info for the rune in the given slot (1..6).
+---@param slot integer  -- 1..6
+---@return rune_info
+function core.spell_book.get_rune_info(slot)
+    -- Example stub values; engine should return real timings:
+    return { start = 0, duration = 0, ready = true }
+end
+
 --- Checks whether a spell is in range from a specified caster to a target.
 --- If `caster` is not provided, it defaults to the local player.
 --- If `target` is not provided, it defaults to the current target of the local player.
@@ -1048,6 +1066,26 @@ end
 ---@param caster? game_object (optional) The caster game object. Defaults to the local player if omitted.
 ---@return boolean Returns true if the target is within range for the specified spell, otherwise false.
 function core.spell_book.is_spell_in_range(spell_id, target, caster)
+    return false
+end
+
+--- Checks whether an item has a built-in range definition (e.g., targetable items).
+--- Engine should resolve the item’s underlying “use spell” and report if range data exists.
+---@param item_id integer
+---@return boolean  -- true if the item supports range checking
+function core.spell_book.has_item_range(item_id)
+    -- Engine-backed; stubbed here for syntax.
+    return false
+end
+
+--- Checks whether an item can be used on `target` with respect to range.
+--- Internally maps the item to its “use spell” and performs a spell range check.
+--- If `target` is nil, the engine may default to the current target.
+---@param item_id integer
+---@param target? game_object
+---@return boolean  -- true if `target` is in range for this item
+function core.spell_book.is_item_in_range(item_id, target)
+    -- Engine-backed; stubbed here for syntax.
     return false
 end
 
@@ -1483,3 +1521,52 @@ function core.menu.window(window_id)
     return {} -- Empty return statement to implicitly return nil
 end
 
+-- Http example:
+-- Without headers
+-- core.http_get("https://httpbin.org/get", function(http_code, content_type, response_data, response_headers)
+--     core.log("Status: " .. http_code)
+--     core.log("Response: " .. response_data)
+--     core.log("ResponseHeaders: " .. response_headers)
+-- end)
+
+-- -- With headers
+-- core.http_get("https://httpbin.org/get", {
+--     ["Authorization"] = "Bearer token123",
+--     ["User-Agent"] = "MyApp/1.0",
+--     ["Accept"] = "application/json"
+-- }, function(http_code, content_type, response_data, response_headers)
+--     core.log("Status: " .. http_code)
+--     core.log("Response: " .. response_data)
+--     core.log("ResponseHeaders: " .. response_headers)
+-- end)
+
+-- Load external texture example:
+-- local function on_render()
+--   if downloaded_texture then
+--         -- Draw at position (100, 100) with size 200x200
+--         local position = vec2.new(100, 100)
+--         core.graphics.draw_texture(downloaded_texture, position, 200, 200)
+
+--         -- Optional: draw with a custom color (semi-transparent white)
+--         -- local color = core.color.new(255, 255, 255, 128)
+--         -- core.graphics.draw_texture(downloaded_texture, position, 200, 200, color)
+--     end
+
+-- end
+
+-- core.http_get("https://dummyimage.com/200x200/000/fff.png", function(http_code, content_type, response_data, response_headers)
+--     if content_type ~= "error" and http_code == 200 then
+--         downloaded_texture, width, height = core.graphics.load_texture(response_data)
+
+--         if downloaded_texture then
+--             core.log("Texture object created successfully and stored in global variable")
+--             core.log("Texture: " .. downloaded_texture)
+--             core.log("width: " .. width)
+--             core.log("height: " .. height)
+--         else
+--             core.log("Failed to create texture from image data")
+--         end
+--     else
+--         core.log("HTTP request failed. Code: " .. tostring(http_code))
+--     end
+-- end)
